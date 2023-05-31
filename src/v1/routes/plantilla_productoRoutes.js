@@ -1,7 +1,7 @@
 const express = require("express");
 const apicache = require("apicache");
 
-const plantilla_productoController = require("../../controllers/plantilla_productoController.js.js");
+const plantilla_productoController = require("../../controllers/plantilla_productoController");
 
 const router = express.Router();
 
