@@ -1,7 +1,7 @@
 const express = require("express");
 const apicache = require("apicache");
 
-const plantilla_productoController = require("../../controllers/plantilla_productoController.js.js");
+const plantilla_insumoController = require("../../controllers/plantilla_insumoController.js");
 
 const router = express.Router();
 
@@ -9,16 +9,16 @@ const cache = apicache.middleware;
 
 /**
  * @openapi
- * /api/v1/plantillas-productos:
+ * /api/v1/plantillas-insumos:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Plantillas-Insumos
  *     parameters:
  *       - in: query
  *         name: name
  *         schema:
  *           type: string
- *         description: The name of the plantilla-producto
+ *         description: The name of the plantilla-insumo
  *     responses:
  *       200:
  *         description: OK
@@ -33,7 +33,7 @@ const cache = apicache.middleware;
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Plantilla_Insumo"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -51,16 +51,16 @@ const cache = apicache.middleware;
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/", plantilla_productoController.getAllPlantillasProductos);
+router.get("/", plantilla_insumoController.getAllPlantillasInsumos);
 /**
  * @openapi
- * /api/v1/plantillas-productos/:planProId:
+ * /api/v1/plantillas-insumos/:planInId:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Plantillas-Insumos
  *     parameters:
  *       - in: query
- *         name: planProId
+ *         name: planInId
  *         schema:
  *           type: string
  *         description: The Id of the winner you want to get.
@@ -78,7 +78,7 @@ router.get("/", plantilla_productoController.getAllPlantillasProductos);
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Plantilla_Insumo"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -96,18 +96,15 @@ router.get("/", plantilla_productoController.getAllPlantillasProductos);
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/:planProId", plantilla_productoController.getOnePlantillaProducto);
+router.get("/:planInId", plantilla_insumoController.getOnePlantillaInsumo);
 
-router.post("/", plantilla_productoController.createNewPlantillaProducto);
+router.post("/", plantilla_insumoController.createNewPlantillaInsumo);
 
-router.patch(
-  "/:planProId",
-  plantilla_productoController.updateOnePlantillaProducto
-);
+router.patch("/:planInId", plantilla_insumoController.updateOnePlantillaInsumo);
 
 router.delete(
-  "/:planProId",
-  plantilla_productoController.deleteOnePlantillaProducto
+  "/:planInId",
+  plantilla_insumoController.deleteOnePlantillaInsumo
 );
 
 module.exports = router;

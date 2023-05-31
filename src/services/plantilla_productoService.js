@@ -41,9 +41,9 @@ const createNewPlantillaProducto = async (newPlantillaProducto) => {
 
 const updateOnePlantillaProducto = async (planProId, changes) => {
   try {
-    const updatedPlantillaProdcuto =
+    const updatedPlantillaProducto =
       await Plantilla_Producto.updateOnePlantillaProducto(planProId, changes);
-    return updatedPlantillaProdcuto;
+    return updatedPlantillaProducto;
   } catch (error) {
     throw error;
   }

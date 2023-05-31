@@ -51,10 +51,10 @@ const createNewPlantillaProducto = async (newPlantillaProducto) => {
 
 const updateOnePlantillaProducto = async (planProId, changes) => {
   try {
-    const updatedPlantillaProdcuto = await Plantilla_Producto.update(changes, {
+    const updatedPlantillaProducto = await Plantilla_Producto.update(changes, {
       where: { id: planProId },
     });
-    return updatedPlantillaProdcuto;
+    return updatedPlantillaProducto;
   } catch (error) {
     throw { status: error?.status || 500, message: error?.message || error };
   }

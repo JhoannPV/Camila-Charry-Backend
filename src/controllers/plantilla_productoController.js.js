@@ -82,12 +82,12 @@ const updateOnePlantillaProducto = async (req, res) => {
     });
   }
   try {
-    const updatedPlantillaProdcuto =
+    const updatedPlantillaProducto =
       await PlantillaProductoService.updateOnePlantillaProducto(
         planProId,
         body
       );
-    res.send({ status: "OK", data: updatedPlantillaProdcuto });
+    res.send({ status: "OK", data: updatedPlantillaProducto });
   } catch (error) {
     res
       .status(error?.status || 500)
