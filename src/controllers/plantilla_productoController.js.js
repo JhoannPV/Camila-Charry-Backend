@@ -8,7 +8,7 @@ const getAllPlantillasProductos = async (req, res) => {
 
   try {
     const allPlantillasProductos =
-      await PlantillasProductos.getAllPlantillasProductos({
+      await PlantillaProductoService.getAllPlantillasProductos({
         nombre,
       });
     res.status(200).send({ status: "OK", data: allPlantillasProductos });
@@ -54,6 +54,8 @@ const createNewPlantillaProducto = async (req, res) => {
   }
   const newPlantillaProducto = {
     nombre: body.nombre,
+    description: body.description,
+    image: body.image,
   };
   try {
     const createdPlantillaProducto =

@@ -2,7 +2,7 @@ const { sequelize } = require("../database/sequelize.config");
 const { DataTypes } = require("sequelize");
 
 const Plantilla_Producto = sequelize.define(
-  "plantilla_producto",
+  "plantillas_producto",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,12 +18,10 @@ const Plantilla_Producto = sequelize.define(
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING(2000),
     },
     image: {
       type: DataTypes.BLOB,
-      allowNull: false,
     },
   },
   {

@@ -16,6 +16,9 @@ const { Plantilla_Producto } = require("../models/plantilla_producto.model");
  *         date:
  *           type: string
  *           example: 30/05/2023
+ *         image:
+ *           type: blob
+ *           example: image.png
  */
 const getAllPlantillasProductos = async () => {
   try {
