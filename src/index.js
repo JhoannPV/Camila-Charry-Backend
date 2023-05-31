@@ -6,7 +6,11 @@ const v1Plantilla_ProductoRouter = require("./v1/routes/plantilla_productoRoutes
 
 const { swaggerDocs: V1SwaggerDocs } = require("./v1/swagger");
 
+const cors = require("cors");
+
 const app = express();
+app.use(cors());
+
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
