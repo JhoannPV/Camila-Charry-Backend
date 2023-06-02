@@ -15,7 +15,12 @@ const signIn = async (params) => {
         throw new Error("Contraseña incorrecta");
       } else {
         const token = jwt.sign({ user }, process.env.JWT_SECRET);
-        return { userId: user.id, username: user.username, token };
+        return {
+          userId: user.id,
+          username: user.username,
+          email: user.email,
+          token,
+        };
       }
     }
   } catch (error) {
