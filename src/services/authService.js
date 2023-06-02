@@ -9,10 +9,10 @@ const signIn = async (params) => {
   try {
     const user = await User.getOneUser(params.username);
     if (!user) {
-      throw new Error("User do not exist!");
+      throw new Error("Usuario no registrado");
     } else {
       if (user.password !== params.password) {
-        throw new Error("Password do not match!");
+        throw new Error("Contraseña incorrecta");
       } else {
         const token = jwt.sign({ user }, process.env.JWT_SECRET);
         return { userId: user.id, username: user.username, token };
