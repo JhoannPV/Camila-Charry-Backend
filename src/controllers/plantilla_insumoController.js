@@ -5,14 +5,23 @@ const jwt = require("jsonwebtoken");
 dotenv.config();
 
 const getAllPlantillasInsumos = async (req, res) => {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ error: "Not Authorized" });
+  }
+  const authHeader = req.headers.authorization;
+  const token = authHeader.split(" ")[1];
+
   const { nombre } = req.query;
 
   try {
-    const allPlantillasInsumos =
-      await PlantillaInsumoService.getAllPlantillasInsumos({
-        nombre,
-      });
-    res.status(200).send({ status: "OK", data: allPlantillasInsumos });
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    if (user) {
+      const allPlantillasInsumos =
+        await PlantillaInsumoService.getAllPlantillasInsumos({
+          nombre,
+        });
+      res.status(200).send({ status: "OK", data: allPlantillasInsumos });
+    }
   } catch (error) {
     res
       .status(error?.status || 500)
