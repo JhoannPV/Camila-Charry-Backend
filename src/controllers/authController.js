@@ -1,34 +1,10 @@
 const authService = require("../services/authService");
-const nodemailer = require("nodemailer");
-
-const EnviarEmail = async (email, token) => {
-  const config = {
-    host: "smtp.gmail.com",
-    port: 587,
-    auth: {
-      user: "malweration@gmail.com",
-      pass: "zmcifyjuohvccpyz",
-    },
-  };
-
-  const mensaje = {
-    from: "malweration@gmail.com",
-    to: email,
-    subject: "Token de acceso",
-    html: `<h3><b>Token</b></h3><br/><p>${token}</p>`,
-  };
-
-  const transport = nodemailer.createTransport(config);
-
-  const info = await transport.sendMail(mensaje);
-};
 
 const signIn = async (req, res) => {
   console.log(req);
   const { username, password } = req.body;
   try {
     const token = await authService.signIn({ username, password });
-    EnviarEmail(token.email, token.token);
     res.status(200).send({ status: "OK", data: token });
   } catch (error) {
     res.status(error?.status || 500).send({
