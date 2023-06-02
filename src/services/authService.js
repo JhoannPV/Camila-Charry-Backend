@@ -18,7 +18,6 @@ const signIn = async (params) => {
         return {
           userId: user.id,
           username: user.username,
-          email: user.email,
           token,
         };
       }
