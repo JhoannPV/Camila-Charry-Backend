@@ -2,10 +2,11 @@ const express = require("express");
 const apicache = require("apicache");
 
 const plantilla_insumoController = require("../../controllers/plantilla_insumoController.js");
+const checkAuth = require("../../middleware/checkAuth");
 
 const router = express.Router();
 
-const cache = apicache.middleware;
+/* const cache = apicache.middleware; */
 
 /**
  * @openapi
@@ -51,7 +52,11 @@ const cache = apicache.middleware;
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/", plantilla_insumoController.getAllPlantillasInsumos);
+router.get(
+  "/",
+  checkAuth.checkAuth,
+  plantilla_insumoController.getAllPlantillasInsumos
+);
 /**
  * @openapi
  * /api/v1/plantillas-insumos/:planInId:
@@ -96,14 +101,27 @@ router.get("/", plantilla_insumoController.getAllPlantillasInsumos);
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/:planInId", plantilla_insumoController.getOnePlantillaInsumo);
+router.get(
+  "/:planInId",
+  checkAuth.checkAuth,
+  plantilla_insumoController.getOnePlantillaInsumo
+);
 
-router.post("/", plantilla_insumoController.createNewPlantillaInsumo);
+router.post(
+  "/",
+  checkAuth.checkAuth,
+  plantilla_insumoController.createNewPlantillaInsumo
+);
 
-router.patch("/:planInId", plantilla_insumoController.updateOnePlantillaInsumo);
+router.patch(
+  "/:planInId",
+  checkAuth.checkAuth,
+  plantilla_insumoController.updateOnePlantillaInsumo
+);
 
 router.delete(
   "/:planInId",
+  checkAuth.checkAuth,
   plantilla_insumoController.deleteOnePlantillaInsumo
 );
 

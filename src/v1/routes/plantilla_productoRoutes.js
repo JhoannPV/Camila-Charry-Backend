@@ -2,10 +2,11 @@ const express = require("express");
 const apicache = require("apicache");
 
 const plantilla_productoController = require("../../controllers/plantilla_productoController");
+const checkAuth = require("../../middleware/checkAuth");
 
 const router = express.Router();
 
-const cache = apicache.middleware;
+/* const cache = apicache.middleware; */
 
 /**
  * @openapi
@@ -51,7 +52,11 @@ const cache = apicache.middleware;
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/", plantilla_productoController.getAllPlantillasProductos);
+router.get(
+  "/",
+  checkAuth.checkAuth,
+  plantilla_productoController.getAllPlantillasProductos
+);
 /**
  * @openapi
  * /api/v1/plantillas-productos/:planProId:
@@ -96,17 +101,27 @@ router.get("/", plantilla_productoController.getAllPlantillasProductos);
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/:planProId", plantilla_productoController.getOnePlantillaProducto);
+router.get(
+  "/:planProId",
+  checkAuth.checkAuth,
+  plantilla_productoController.getOnePlantillaProducto
+);
 
-router.post("/", plantilla_productoController.createNewPlantillaProducto);
+router.post(
+  "/",
+  checkAuth.checkAuth,
+  plantilla_productoController.createNewPlantillaProducto
+);
 
 router.patch(
   "/:planProId",
+  checkAuth.checkAuth,
   plantilla_productoController.updateOnePlantillaProducto
 );
 
 router.delete(
   "/:planProId",
+  checkAuth.checkAuth,
   plantilla_productoController.deleteOnePlantillaProducto
 );
 

@@ -1,10 +1,10 @@
 const { v4: uuid } = require("uuid");
 const Plantilla_Producto = require("../database/Plantilla_Producto");
 
-const getAllPlantillasProductos = async (filterParams) => {
+const getAllPlantillasProductos = async () => {
   try {
     const allPlantillasProductos =
-      await Plantilla_Producto.getAllPlantillasProductos(filterParams);
+      await Plantilla_Producto.getAllPlantillasProductos();
     return allPlantillasProductos;
   } catch (error) {
     throw error;
