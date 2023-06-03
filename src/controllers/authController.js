@@ -15,12 +15,12 @@ const signIn = async (req, res) => {
 };
 
 const signUp = async (req, res) => {
-  const { nombre, apellido, edad, username, email, password, role } = req.body;
+  const { nombre, apellido, sexo, username, email, password, role } = req.body;
   try {
     const createdUser = await authService.signUp({
       nombre,
       apellido,
-      edad,
+      sexo,
       username,
       email,
       password,

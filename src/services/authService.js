@@ -14,12 +14,16 @@ const signIn = async (params) => {
       if (user.password !== params.password) {
         throw new Error("Contraseña incorrecta");
       } else {
-        const token = jwt.sign({ user }, process.env.JWT_SECRET);
-        return {
-          userId: user.id,
-          username: user.username,
-          token,
-        };
+        if (user.role !== "Administrador") {
+          throw new Error("No tiene cuenta de Administrador");
+        } else {
+          const token = jwt.sign({ user }, process.env.JWT_SECRET);
+          return {
+            userId: user.id,
+            username: user.username,
+            token,
+          };
+        }
       }
     }
   } catch (error) {
