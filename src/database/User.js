@@ -5,7 +5,7 @@ const getOneUser = async (username) => {
     const user = await User.findOne({ where: { username: username } });
     return user;
   } catch (error) {
-    throw { status: 500, message: error?.message || error };
+    throw error;
   }
 };
 
@@ -35,7 +35,30 @@ const getOneUserG = async (userId) => {
     throw { status: 500, message: error?.message || error };
   }
 };
-
+const getOneUserUsername = async (params) => {
+  try {
+    const user = await User.findOne({ where: { username: params.username } });
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+const getOneUserEmail = async (params) => {
+  try {
+    const user = await User.findOne({ where: { email: params.email } });
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 const updateOneUser = async (userId, changes) => {
   try {
     const updatedUser = await User.update(changes, {
@@ -68,4 +91,6 @@ module.exports = {
   getOneUserG,
   updateOneUser,
   deleteOneUser,
+  getOneUserUsername,
+  getOneUserEmail,
 };
