@@ -28,6 +28,23 @@ const getOnePlantillaInsumo = async (req, res) => {
   }
 };
 
+const getBuscarPlantillaInsumo = async (req, res) => {
+  console.log(req);
+  const { nombre } = req.body;
+  try {
+    const plantilla_insumo =
+      await PlantillaInsumoService.getBuscarPlantillaInsumo({
+        nombre,
+      });
+    res.status(200).send({ status: "OK", data: plantilla_insumo });
+  } catch (error) {
+    res.status(error?.status || 500).send({
+      status: "FAILED",
+      data: { error: error?.message || error },
+    });
+  }
+};
+
 const createNewPlantillaInsumo = async (req, res) => {
   const { body } = req;
   if (!body.nombre) {
@@ -99,4 +116,5 @@ module.exports = {
   createNewPlantillaInsumo,
   updateOnePlantillaInsumo,
   deleteOnePlantillaInsumo,
+  getBuscarPlantillaInsumo,
 };

@@ -27,6 +27,23 @@ const getOnePlantillaProducto = async (req, res) => {
   }
 };
 
+const getBuscarPlantillaProducto = async (req, res) => {
+  console.log(req);
+  const { nombre } = req.body;
+  try {
+    const plantilla_producto =
+      await PlantillaProductoService.getBuscarPlantillaProducto({
+        nombre,
+      });
+    res.status(200).send({ status: "OK", data: plantilla_producto });
+  } catch (error) {
+    res.status(error?.status || 500).send({
+      status: "FAILED",
+      data: { error: error?.message || error },
+    });
+  }
+};
+
 const createNewPlantillaProducto = async (req, res) => {
   const { body } = req;
   if (!body.nombre) {
@@ -103,4 +120,5 @@ module.exports = {
   createNewPlantillaProducto,
   updateOnePlantillaProducto,
   deleteOnePlantillaProducto,
+  getBuscarPlantillaProducto,
 };

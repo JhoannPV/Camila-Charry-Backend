@@ -22,6 +22,22 @@ const getOnePlantillaProducto = async (planProId) => {
   }
 };
 
+const getBuscarPlantillaProducto = async (params) => {
+  try {
+    const plantilla_producto =
+      await Plantilla_Producto.getBuscarPlantillaProducto(params.nombre);
+    if (!plantilla_producto) {
+      throw new Error(
+        "La plantilla que desea buscar no se encuentra registrada"
+      );
+    } else {
+      return plantilla_producto;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createNewPlantillaProducto = async (newPlantillaProducto) => {
   const plantilla_productoToInsert = {
     ...newPlantillaProducto,
@@ -72,4 +88,5 @@ module.exports = {
   createNewPlantillaProducto,
   updateOnePlantillaProducto,
   deleteOnePlantillaProducto,
+  getBuscarPlantillaProducto,
 };

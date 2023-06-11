@@ -113,6 +113,12 @@ router.post(
   plantilla_productoController.createNewPlantillaProducto
 );
 
+router.post(
+  "/buscarPlanPro",
+  checkAuth.checkAuth,
+  plantilla_productoController.getBuscarPlantillaProducto
+);
+
 router.patch(
   "/:planProId",
   checkAuth.checkAuth,

@@ -22,6 +22,23 @@ const getOnePlantillaInsumo = async (planInId) => {
   }
 };
 
+const getBuscarPlantillaInsumo = async (params) => {
+  try {
+    const plantilla_insumo = await Plantilla_Insumo.getBuscarPlantillaInsumo(
+      params.nombre
+    );
+    if (!plantilla_insumo) {
+      throw new Error(
+        "La plantilla que desea buscar no se encuentra registrada"
+      );
+    } else {
+      return plantilla_insumo;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createNewPlantillaInsumo = async (newPlantillaInsumo) => {
   const plantilla_insumoToInsert = {
     ...newPlantillaInsumo,
@@ -70,4 +87,5 @@ module.exports = {
   createNewPlantillaInsumo,
   updateOnePlantillaInsumo,
   deleteOnePlantillaInsumo,
+  getBuscarPlantillaInsumo,
 };

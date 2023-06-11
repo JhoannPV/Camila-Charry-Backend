@@ -113,6 +113,12 @@ router.post(
   plantilla_insumoController.createNewPlantillaInsumo
 );
 
+router.post(
+  "/buscarPlanIn",
+  checkAuth.checkAuth,
+  plantilla_insumoController.getBuscarPlantillaInsumo
+);
+
 router.patch(
   "/:planInId",
   checkAuth.checkAuth,

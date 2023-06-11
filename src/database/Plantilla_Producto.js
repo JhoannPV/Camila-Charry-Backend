@@ -53,6 +53,17 @@ const getOnePlantillaProductoName = async (params) => {
   }
 };
 
+const getBuscarPlantillaProducto = async (nombre) => {
+  try {
+    const plantilla_producto = await Plantilla_Producto.findOne({
+      where: { nombre: nombre },
+    });
+    return plantilla_producto;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createNewPlantillaProducto = async (newPlantillaProducto) => {
   try {
     const createdPlantillaProducto = await Plantilla_Producto.create(
@@ -96,4 +107,5 @@ module.exports = {
   updateOnePlantillaProducto,
   deleteOnePlantillaProducto,
   getOnePlantillaProductoName,
+  getBuscarPlantillaProducto,
 };
