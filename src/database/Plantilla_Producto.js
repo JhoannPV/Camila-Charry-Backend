@@ -38,6 +38,21 @@ const getOnePlantillaProducto = async (planProId) => {
   }
 };
 
+const getOnePlantillaProductoName = async (params) => {
+  try {
+    const plantilla_producto = await Plantilla_Producto.findOne({
+      where: { nombre: params.nombre },
+    });
+    if (plantilla_producto) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createNewPlantillaProducto = async (newPlantillaProducto) => {
   try {
     const createdPlantillaProducto = await Plantilla_Producto.create(
@@ -63,7 +78,7 @@ const updateOnePlantillaProducto = async (planProId, changes) => {
 const deleteOnePlantillaProducto = async (planProId) => {
   try {
     if (!(await Plantilla_Producto.findByPk(planProId))) {
-      throw new Error("No sen econtró el elemento");
+      throw new Error("No sen encontró el elemento");
     }
     const deletedPlantillaProducto = await Plantilla_Producto.destroy({
       where: { id: planProId },
@@ -80,4 +95,5 @@ module.exports = {
   createNewPlantillaProducto,
   updateOnePlantillaProducto,
   deleteOnePlantillaProducto,
+  getOnePlantillaProductoName,
 };

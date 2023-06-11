@@ -38,6 +38,21 @@ const getOnePlantillaInsumo = async (planInId) => {
   }
 };
 
+const getOnePlantillaInsumoName = async (params) => {
+  try {
+    const plantilla_insumo = await Plantilla_Insumo.findOne({
+      where: { nombre: params.nombre },
+    });
+    if (plantilla_insumo) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createNewPlantillaInsumo = async (newPlantillaInsumo) => {
   try {
     const createdPlantillaInsumo = await Plantilla_Insumo.create(
@@ -80,4 +95,5 @@ module.exports = {
   createNewPlantillaInsumo,
   updateOnePlantillaInsumo,
   deleteOnePlantillaInsumo,
+  getOnePlantillaInsumoName,
 };

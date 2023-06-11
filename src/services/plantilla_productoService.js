@@ -27,13 +27,20 @@ const createNewPlantillaProducto = async (newPlantillaProducto) => {
     ...newPlantillaProducto,
     fecha: new Date().toLocaleString("en-US", { timeZone: "America/Bogota" }),
   };
-
+  const repetidoPlantillaProducto =
+    await Plantilla_Producto.getOnePlantillaProductoName(
+      plantilla_productoToInsert
+    );
   try {
-    const createdPlantillaProducto =
-      await Plantilla_Producto.createNewPlantillaProducto(
-        plantilla_productoToInsert
-      );
-    return createdPlantillaProducto;
+    if (repetidoPlantillaProducto === true) {
+      throw new Error("Plantilla Repetida");
+    } else if (repetidoPlantillaProducto === false) {
+      const createdPlantillaProducto =
+        await Plantilla_Producto.createNewPlantillaProducto(
+          plantilla_productoToInsert
+        );
+      return createdPlantillaProducto;
+    }
   } catch (error) {
     throw error;
   }

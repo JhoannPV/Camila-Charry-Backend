@@ -27,11 +27,18 @@ const createNewPlantillaInsumo = async (newPlantillaInsumo) => {
     ...newPlantillaInsumo,
     fecha: new Date().toLocaleString("en-US", { timeZone: "America/Bogota" }),
   };
-
+  const repetidoPlantillaInsumo =
+    await Plantilla_Insumo.getOnePlantillaInsumoName(plantilla_insumoToInsert);
   try {
-    const createdPlantillaInsumo =
-      await Plantilla_Insumo.createNewPlantillaInsumo(plantilla_insumoToInsert);
-    return createdPlantillaInsumo;
+    if (repetidoPlantillaInsumo === true) {
+      throw new Error("Plantilla Repetida");
+    } else if (repetidoPlantillaInsumo === false) {
+      const createdPlantillaInsumo =
+        await Plantilla_Insumo.createNewPlantillaInsumo(
+          plantilla_insumoToInsert
+        );
+      return createdPlantillaInsumo;
+    }
   } catch (error) {
     throw error;
   }
