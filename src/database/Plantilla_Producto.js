@@ -100,6 +100,17 @@ const deleteOnePlantillaProducto = async (planProId) => {
   }
 };
 
+const deletePlantillaProducto = async (nombre) => {
+  try {
+    const plantilla_producto = await Plantilla_Producto.destroy({
+      where: { nombre: nombre },
+    });
+    return plantilla_producto;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getAllPlantillasProductos,
   getOnePlantillaProducto,
@@ -108,4 +119,5 @@ module.exports = {
   deleteOnePlantillaProducto,
   getOnePlantillaProductoName,
   getBuscarPlantillaProducto,
+  deletePlantillaProducto,
 };

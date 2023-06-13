@@ -119,6 +119,12 @@ router.post(
   plantilla_insumoController.getBuscarPlantillaInsumo
 );
 
+router.post(
+  "/eliminarPlanIn",
+  checkAuth.checkAuth,
+  plantilla_insumoController.deletePlantillaInsumo
+);
+
 router.patch(
   "/:planInId",
   checkAuth.checkAuth,

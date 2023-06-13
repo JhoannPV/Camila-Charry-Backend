@@ -119,6 +119,12 @@ router.post(
   plantilla_productoController.getBuscarPlantillaProducto
 );
 
+router.post(
+  "/eliminarPlanPro",
+  checkAuth.checkAuth,
+  plantilla_productoController.deletePlantillaProducto
+);
+
 router.patch(
   "/:planProId",
   checkAuth.checkAuth,

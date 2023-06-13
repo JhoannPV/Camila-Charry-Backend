@@ -29,7 +29,6 @@ const getOnePlantillaInsumo = async (req, res) => {
 };
 
 const getBuscarPlantillaInsumo = async (req, res) => {
-  console.log(req);
   const { nombre } = req.body;
   try {
     const plantilla_insumo =
@@ -110,6 +109,23 @@ const deleteOnePlantillaInsumo = async (req, res) => {
   }
 };
 
+const deletePlantillaInsumo = async (req, res) => {
+  const { nombre } = req.body;
+  try {
+    const plantilla_insumo = await PlantillaInsumoService.deletePlantillaInsumo(
+      {
+        nombre,
+      }
+    );
+    res.status(200).send({ status: "OK", data: plantilla_insumo });
+  } catch (error) {
+    res.status(error?.status || 500).send({
+      status: "FAILED",
+      data: { error: error?.message || error },
+    });
+  }
+};
+
 module.exports = {
   getAllPlantillasInsumos,
   getOnePlantillaInsumo,
@@ -117,4 +133,5 @@ module.exports = {
   updateOnePlantillaInsumo,
   deleteOnePlantillaInsumo,
   getBuscarPlantillaInsumo,
+  deletePlantillaInsumo,
 };

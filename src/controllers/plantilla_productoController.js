@@ -28,7 +28,6 @@ const getOnePlantillaProducto = async (req, res) => {
 };
 
 const getBuscarPlantillaProducto = async (req, res) => {
-  console.log(req);
   const { nombre } = req.body;
   try {
     const plantilla_producto =
@@ -114,6 +113,22 @@ const deleteOnePlantillaProducto = async (req, res) => {
   }
 };
 
+const deletePlantillaProducto = async (req, res) => {
+  const { nombre } = req.body;
+  try {
+    const plantilla_producto =
+      await PlantillaProductoService.deletePlantillaProducto({
+        nombre,
+      });
+    res.status(200).send({ status: "OK", data: plantilla_producto });
+  } catch (error) {
+    res.status(error?.status || 500).send({
+      status: "FAILED",
+      data: { error: error?.message || error },
+    });
+  }
+};
+
 module.exports = {
   getAllPlantillasProductos,
   getOnePlantillaProducto,
@@ -121,4 +136,5 @@ module.exports = {
   updateOnePlantillaProducto,
   deleteOnePlantillaProducto,
   getBuscarPlantillaProducto,
+  deletePlantillaProducto,
 };
