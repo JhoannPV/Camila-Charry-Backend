@@ -26,7 +26,11 @@ const getBuscarPlantillaProducto = async (params) => {
   try {
     const plantilla_producto =
       await Plantilla_Producto.getBuscarPlantillaProducto(params.nombre);
-    return plantilla_producto;
+    if (plantilla_producto.estado === true) {
+      return plantilla_producto.plantilla;
+    } else if (plantilla_producto.estado === false) {
+      return null;
+    }
   } catch (error) {
     throw error;
   }

@@ -27,7 +27,11 @@ const getBuscarPlantillaInsumo = async (params) => {
     const plantilla_insumo = await Plantilla_Insumo.getBuscarPlantillaInsumo(
       params.nombre
     );
-    return plantilla_insumo;
+    if (plantilla_insumo.estado === true) {
+      return plantilla_insumo.plantilla;
+    } else if (plantilla_insumo.estado === false) {
+      return null;
+    }
   } catch (error) {
     throw error;
   }

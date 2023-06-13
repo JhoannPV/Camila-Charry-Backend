@@ -1,4 +1,5 @@
 const { Plantilla_Insumo } = require("../models/plantilla_insumo.model");
+const { Op } = require("sequelize");
 
 /**
  * @openapi
@@ -22,7 +23,9 @@ const { Plantilla_Insumo } = require("../models/plantilla_insumo.model");
  */
 const getAllPlantillasInsumos = async () => {
   try {
-    const plantilla_insumo = await Plantilla_Insumo.findAll();
+    const plantilla_insumo = await Plantilla_Insumo.findAll({
+      order: [["nombre", "ASC"]],
+    });
     return plantilla_insumo;
   } catch (error) {
     throw { status: 500, message: error?.message || error };
@@ -55,10 +58,15 @@ const getOnePlantillaInsumoName = async (params) => {
 
 const getBuscarPlantillaInsumo = async (nombre) => {
   try {
-    const plantilla_insumo = await Plantilla_Insumo.findOne({
-      where: { nombre: nombre },
+    const plantilla_insumo = await Plantilla_Insumo.findAll({
+      where: { nombre: { [Op.like]: `%${nombre}%` } },
+      order: [["nombre", "ASC"]],
     });
-    return plantilla_insumo;
+    if (plantilla_insumo && plantilla_insumo.length !== 0) {
+      return { estado: true, plantilla: plantilla_insumo };
+    } else if (plantilla_insumo.length === 0) {
+      return { estado: false, plantilla: plantilla_insumo };
+    }
   } catch (error) {
     throw error;
   }

@@ -1,4 +1,5 @@
 const { Plantilla_Producto } = require("../models/plantilla_producto.model");
+const { Op } = require("sequelize");
 
 /**
  * @openapi
@@ -22,7 +23,9 @@ const { Plantilla_Producto } = require("../models/plantilla_producto.model");
  */
 const getAllPlantillasProductos = async () => {
   try {
-    const plantilla_producto = await Plantilla_Producto.findAll();
+    const plantilla_producto = await Plantilla_Producto.findAll({
+      order: [["nombre", "ASC"]],
+    });
     return plantilla_producto;
   } catch (error) {
     throw { status: 500, message: error?.message || error };
@@ -55,10 +58,17 @@ const getOnePlantillaProductoName = async (params) => {
 
 const getBuscarPlantillaProducto = async (nombre) => {
   try {
-    const plantilla_producto = await Plantilla_Producto.findOne({
-      where: { nombre: nombre },
+    const plantilla_producto = await Plantilla_Producto.findAll({
+      where: {
+        nombre: { [Op.like]: `%${nombre}%` },
+      },
+      order: [["nombre", "ASC"]],
     });
-    return plantilla_producto;
+    if (plantilla_producto && plantilla_producto.length !== 0) {
+      return { estado: true, plantilla: plantilla_producto };
+    } else if (plantilla_producto.length === 0) {
+      return { estado: false, plantilla: plantilla_producto };
+    }
   } catch (error) {
     throw error;
   }
