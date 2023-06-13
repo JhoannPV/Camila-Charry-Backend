@@ -27,13 +27,7 @@ const getBuscarPlantillaInsumo = async (params) => {
     const plantilla_insumo = await Plantilla_Insumo.getBuscarPlantillaInsumo(
       params.nombre
     );
-    if (!plantilla_insumo) {
-      throw new Error(
-        "La plantilla que desea buscar no se encuentra registrada"
-      );
-    } else {
-      return plantilla_insumo;
-    }
+    return plantilla_insumo;
   } catch (error) {
     throw error;
   }
@@ -47,14 +41,14 @@ const createNewPlantillaInsumo = async (newPlantillaInsumo) => {
   const repetidoPlantillaInsumo =
     await Plantilla_Insumo.getOnePlantillaInsumoName(plantilla_insumoToInsert);
   try {
-    if (repetidoPlantillaInsumo === true) {
-      throw new Error("Plantilla Repetida");
-    } else if (repetidoPlantillaInsumo === false) {
+    if (repetidoPlantillaInsumo === false) {
       const createdPlantillaInsumo =
         await Plantilla_Insumo.createNewPlantillaInsumo(
           plantilla_insumoToInsert
         );
       return createdPlantillaInsumo;
+    } else {
+      return null;
     }
   } catch (error) {
     throw error;

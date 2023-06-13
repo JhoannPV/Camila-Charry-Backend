@@ -26,13 +26,7 @@ const getBuscarPlantillaProducto = async (params) => {
   try {
     const plantilla_producto =
       await Plantilla_Producto.getBuscarPlantillaProducto(params.nombre);
-    if (!plantilla_producto) {
-      throw new Error(
-        "La plantilla que desea buscar no se encuentra registrada"
-      );
-    } else {
-      return plantilla_producto;
-    }
+    return plantilla_producto;
   } catch (error) {
     throw error;
   }
@@ -48,14 +42,14 @@ const createNewPlantillaProducto = async (newPlantillaProducto) => {
       plantilla_productoToInsert
     );
   try {
-    if (repetidoPlantillaProducto === true) {
-      throw new Error("Plantilla Repetida");
-    } else if (repetidoPlantillaProducto === false) {
+    if (repetidoPlantillaProducto === false) {
       const createdPlantillaProducto =
         await Plantilla_Producto.createNewPlantillaProducto(
           plantilla_productoToInsert
         );
       return createdPlantillaProducto;
+    } else {
+      return null;
     }
   } catch (error) {
     throw error;
