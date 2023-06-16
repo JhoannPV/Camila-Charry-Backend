@@ -85,7 +85,7 @@ const updateOnePlantillaInsumo = async (req, res) => {
   }
   try {
     const updatedPlantillaInsumo =
-      await PlantillaProductoService.updateOnePlantillaInsumo(planInId, body);
+      await PlantillaInsumoService.updateOnePlantillaInsumo(planInId, body);
     res.send({ status: "OK", data: updatedPlantillaInsumo });
   } catch (error) {
     res

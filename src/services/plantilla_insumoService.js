@@ -62,7 +62,7 @@ const createNewPlantillaInsumo = async (newPlantillaInsumo) => {
 const updateOnePlantillaInsumo = async (planInId, changes) => {
   try {
     const updatedPlantillaInsumo =
-      await Plantilla_Insumo.updateOnePlantillaProducto(planInId, changes);
+      await Plantilla_Insumo.updateOnePlantillaInsumo(planInId, changes);
     return updatedPlantillaInsumo;
   } catch (error) {
     throw error;
@@ -72,7 +72,7 @@ const updateOnePlantillaInsumo = async (planInId, changes) => {
 const deleteOnePlantillaInsumo = async (planInId) => {
   try {
     const deletedPlantillaInsumo =
-      await Plantilla_Insumo.deleteOnePlantillaProducto(planInId);
+      await Plantilla_Insumo.deleteOnePlantillaInsumo(planInId);
     return deletedPlantillaInsumo;
   } catch (error) {
     throw error;
