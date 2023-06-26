@@ -68,7 +68,7 @@ router.get(
  *         name: planInId
  *         schema:
  *           type: string
- *         description: The Id of the winner you want to get.
+ *         description: The Id of the plantilla-insumo you want to get.
  *     responses:
  *       200:
  *         description: OK

@@ -1,7 +1,7 @@
 const express = require("express");
 const apicache = require("apicache");
 
-const plantilla_productoController = require("../../controllers/plantilla_productoController");
+const productoController = require("../../controllers/productoController");
 const checkAuth = require("../../middleware/checkAuth");
 
 const router = express.Router();
@@ -10,16 +10,16 @@ const router = express.Router();
 
 /**
  * @openapi
- * /api/v1/plantillas-productos:
+ * /api/v1/productos:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Productos
  *     parameters:
  *       - in: query
  *         name: name
  *         schema:
  *           type: string
- *         description: The name of the plantilla-producto
+ *         description: The name of the producto
  *     responses:
  *       200:
  *         description: OK
@@ -34,7 +34,7 @@ const router = express.Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Producto"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -52,23 +52,24 @@ const router = express.Router();
  *                       type: string
  *                       example: "Some error message"
  */
-router.get(
-  "/",
+router.get("/", checkAuth.checkAuth, productoController.getAllProductos);
+router.post(
+  "/forPlanPro",
   checkAuth.checkAuth,
-  plantilla_productoController.getAllPlantillasProductos
+  productoController.getAllProductosForPlan
 );
 /**
  * @openapi
- * /api/v1/plantillas-productos/:planProId:
+ * /api/v1/productos/:proId:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Productos
  *     parameters:
  *       - in: query
- *         name: planProId
+ *         name: proId
  *         schema:
  *           type: string
- *         description: The Id of the plantilla-producto you want to get.
+ *         description: The Id of the producto you want to get.
  *     responses:
  *       200:
  *         description: OK
@@ -83,7 +84,7 @@ router.get(
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Producto"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -101,40 +102,32 @@ router.get(
  *                       type: string
  *                       example: "Some error message"
  */
-router.get(
-  "/:planProId",
+router.get("/:proId", checkAuth.checkAuth, productoController.getOneProducto);
+
+router.post("/", checkAuth.checkAuth, productoController.createNewProducto);
+
+router.post(
+  "/buscarPro",
   checkAuth.checkAuth,
-  plantilla_productoController.getOnePlantillaProducto
+  productoController.getBuscarProducto
 );
 
 router.post(
-  "/",
+  "/eliminarPro",
   checkAuth.checkAuth,
-  plantilla_productoController.createNewPlantillaProducto
-);
-
-router.post(
-  "/buscarPlanPro",
-  checkAuth.checkAuth,
-  plantilla_productoController.getBuscarPlantillaProducto
-);
-
-router.post(
-  "/eliminarPlanPro",
-  checkAuth.checkAuth,
-  plantilla_productoController.deletePlantillaProducto
+  productoController.deleteProducto
 );
 
 router.patch(
-  "/:planProId",
+  "/:proId",
   checkAuth.checkAuth,
-  plantilla_productoController.updateOnePlantillaProducto
+  productoController.updateOneProducto
 );
 
 router.delete(
-  "/:planProId",
+  "/:proId",
   checkAuth.checkAuth,
-  plantilla_productoController.deleteOnePlantillaProducto
+  productoController.deleteOneProducto
 );
 
 module.exports = router;

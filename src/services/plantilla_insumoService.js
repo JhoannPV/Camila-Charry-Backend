@@ -82,7 +82,7 @@ const deleteOnePlantillaInsumo = async (planInId) => {
 const deletePlantillaInsumo = async (params) => {
   try {
     const plantilla_insumo = await Plantilla_Insumo.deletePlantillaInsumo(
-      params.nombre
+      params
     );
     return plantilla_insumo;
   } catch (error) {

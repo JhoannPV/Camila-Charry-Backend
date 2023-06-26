@@ -83,7 +83,7 @@ const deleteOnePlantillaProducto = async (planProId) => {
 const deletePlantillaProducto = async (params) => {
   try {
     const plantilla_producto = await Plantilla_Producto.deletePlantillaProducto(
-      params.nombre
+      params
     );
     return plantilla_producto;
   } catch (error) {

@@ -1,7 +1,7 @@
 const express = require("express");
 const apicache = require("apicache");
 
-const plantilla_productoController = require("../../controllers/plantilla_productoController");
+const insumoController = require("../../controllers/insumoController.js");
 const checkAuth = require("../../middleware/checkAuth");
 
 const router = express.Router();
@@ -10,16 +10,16 @@ const router = express.Router();
 
 /**
  * @openapi
- * /api/v1/plantillas-productos:
+ * /api/v1/insumos:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Insumos
  *     parameters:
  *       - in: query
  *         name: name
  *         schema:
  *           type: string
- *         description: The name of the plantilla-producto
+ *         description: The name of the insumo
  *     responses:
  *       200:
  *         description: OK
@@ -34,7 +34,7 @@ const router = express.Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Insumo"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -52,23 +52,24 @@ const router = express.Router();
  *                       type: string
  *                       example: "Some error message"
  */
-router.get(
-  "/",
+router.get("/", checkAuth.checkAuth, insumoController.getAllInsumos);
+router.post(
+  "/forPlanIn",
   checkAuth.checkAuth,
-  plantilla_productoController.getAllPlantillasProductos
+  insumoController.getAllInsumosForPlan
 );
 /**
  * @openapi
- * /api/v1/plantillas-productos/:planProId:
+ * /api/v1/insumos/:inId:
  *   get:
  *     tags:
- *       - Plantillas-Productos
+ *       - Insumos
  *     parameters:
  *       - in: query
- *         name: planProId
+ *         name: inId
  *         schema:
  *           type: string
- *         description: The Id of the plantilla-producto you want to get.
+ *         description: The Id of the insumo you want to get.
  *     responses:
  *       200:
  *         description: OK
@@ -83,7 +84,7 @@ router.get(
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Plantilla_Producto"
+ *                     $ref: "#/components/schemas/Insumo"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -101,40 +102,16 @@ router.get(
  *                       type: string
  *                       example: "Some error message"
  */
-router.get(
-  "/:planProId",
-  checkAuth.checkAuth,
-  plantilla_productoController.getOnePlantillaProducto
-);
+router.get("/:inId", checkAuth.checkAuth, insumoController.getOneInsumo);
 
-router.post(
-  "/",
-  checkAuth.checkAuth,
-  plantilla_productoController.createNewPlantillaProducto
-);
+router.post("/", checkAuth.checkAuth, insumoController.createNewInsumo);
 
-router.post(
-  "/buscarPlanPro",
-  checkAuth.checkAuth,
-  plantilla_productoController.getBuscarPlantillaProducto
-);
+router.post("/buscarIn", checkAuth.checkAuth, insumoController.getBuscarInsumo);
 
-router.post(
-  "/eliminarPlanPro",
-  checkAuth.checkAuth,
-  plantilla_productoController.deletePlantillaProducto
-);
+router.post("/eliminarIn", checkAuth.checkAuth, insumoController.deleteInsumo);
 
-router.patch(
-  "/:planProId",
-  checkAuth.checkAuth,
-  plantilla_productoController.updateOnePlantillaProducto
-);
+router.patch("/:inId", checkAuth.checkAuth, insumoController.updateOneInsumo);
 
-router.delete(
-  "/:planProId",
-  checkAuth.checkAuth,
-  plantilla_productoController.deleteOnePlantillaProducto
-);
+router.delete("/:inId", checkAuth.checkAuth, insumoController.deleteOneInsumo);
 
 module.exports = router;

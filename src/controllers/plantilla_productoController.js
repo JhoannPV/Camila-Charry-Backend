@@ -117,9 +117,7 @@ const deletePlantillaProducto = async (req, res) => {
   const { nombre } = req.body;
   try {
     const plantilla_producto =
-      await PlantillaProductoService.deletePlantillaProducto({
-        nombre,
-      });
+      await PlantillaProductoService.deletePlantillaProducto(nombre);
     res.status(200).send({ status: "OK", data: plantilla_producto });
   } catch (error) {
     res.status(error?.status || 500).send({

@@ -113,9 +113,7 @@ const deletePlantillaInsumo = async (req, res) => {
   const { nombre } = req.body;
   try {
     const plantilla_insumo = await PlantillaInsumoService.deletePlantillaInsumo(
-      {
-        nombre,
-      }
+      nombre
     );
     res.status(200).send({ status: "OK", data: plantilla_insumo });
   } catch (error) {
